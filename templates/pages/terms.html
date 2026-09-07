@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Terms &amp; Conditions | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Terms &amp; Conditions</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Terms &amp; Conditions</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Legal Content -->
+   <section class="sec-padding bg-shade">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Legal Agreement</span>
+            <h2 class="sec-title">Service Agreement Terms &amp; Conditions</h2>
+         </div>
+
+         <div class="row justify-content-center">
+            <div class="col-lg-10">
+               <div class="notice-banner">
+                  <i class="bi bi-file-earmark-text"></i>
+                  <h5>Important Legal Notice</h5>
+                  <p>Effective Date: November 8, 2025. By utilizing any services provided by {{ site_settings.site_name }} (the "Carrier"), you ("The Shipper") agree to be bound by these Terms and Conditions of Carriage. These terms limit our liability.</p>
+               </div>
+
+               <div class="legal-wrapper">
+                  <div class="legal-section">
+                     <h4><span class="article-badge">I</span>Definitions</h4>
+                     <ul>
+                        <li><strong>Carrier:</strong> Refers to {{ site_settings.site_name }}, including its employees, agents, and independent contractors.</li>
+                        <li><strong>Shipper:</strong> The party contracting with the Carrier for the carriage of Goods.</li>
+                        <li><strong>Consignee:</strong> The recipient of the Goods specified on the shipping label.</li>
+                        <li><strong>Goods:</strong> Any articles of commerce, package, document, or item accepted by the Carrier for transport.</li>
+                        <li><strong>Air Waybill (AWB):</strong> The non-negotiable document used for air freight shipments, incorporating these Terms.</li>
+                     </ul>
+                  </div>
+
+                  <div class="legal-section">
+                     <h4><span class="article-badge">II</span>Acceptance and Scope of Service</h4>
+                     <p><strong>2.1. Agreement:</strong> The Shipper agrees that carriage is subject to the conditions herein, and that these Terms apply to all employees and agents of the Carrier.</p>
+                     <p><strong>2.2. Documentation:</strong> The Shipper is responsible for providing complete and accurate documentation, including the Commercial Invoice, Packing List, and customs declarations. Incorrect or incomplete documentation may result in delays, fines, or seizure of Goods, for which the Carrier accepts no liability.</p>
+                  </div>
+
+                  <div class="legal-section">
+                     <h4><span class="article-badge">III</span>Prohibited and Restricted Items</h4>
+                     <p>The Carrier reserves the right to refuse, hold, or return any Goods deemed unacceptable for transport. Prohibited Goods include, but are not limited to:</p>
+                     <ul>
+                        <li>Hazardous materials (HAZMAT) not declared and packaged according to IATA/IMO regulations.</li>
+                        <li>Illegal goods (e.g., narcotics, counterfeit items).</li>
+                        <li>Live animals (unless specifically agreed upon under Cold Chain Logistics terms).</li>
+                        <li>Firearms, explosives, and ammunition.</li>
+                        <li>Perishable items requiring specialized temperature control without prior agreement.</li>
+                     </ul>
+                     <div class="highlight-box danger">
+                        <p><i class="bi bi-exclamation-triangle-fill me-2" style="color: #dc3545;"></i> <strong>NOTE:</strong> If the Shipper tenders Prohibited Goods, the Shipper shall indemnify the Carrier against all claims, fines, and expenses incurred as a result.</p>
+                     </div>
+                  </div>
+
+                  <div class="legal-section">
+                     <h4><span class="article-badge">IV</span>Limitation of Liability and Insurance</h4>
+                     <p><strong>4.1. Limitation of Liability:</strong> The liability of the Carrier for loss or damage to the Goods is strictly limited by national and international conventions (e.g., Montreal Convention for air carriage). Unless the Shipper purchases additional insurance, the Carrier's liability shall not exceed the lower of:</p>
+                     <ul>
+                        <li>The proven value of the Goods; or</li>
+                        <li>The statutory limit applicable to the mode of transport (e.g., 19 Special Drawing Rights (SDR) per kilogram for Air Freight).</li>
+                     </ul>
+                     <p><strong>4.2. Indirect Damages:</strong> The Carrier shall NOT be liable for any indirect, incidental, special, or consequential loss or damage, including, but not limited to, loss of income, profits, interest, or market.</p>
+                     <p><strong>4.3. Time Limits for Claims:</strong> Any claims for damage (visible or concealed) or partial loss must be submitted to the Carrier in writing within 7 calendar days of delivery. Claims for total loss or non-delivery must be submitted within 60 days from the date the Goods were accepted by the Carrier.</p>
+                     <p><strong>4.4. Enhanced Insurance:</strong> The Shipper may purchase enhanced All-Risk Insurance coverage for the full declared commercial value of the Goods at the time of booking.</p>
+                  </div>
+
+                  <div class="legal-section">
+                     <h4><span class="article-badge">V</span>Delay and Transit Times</h4>
+                     <p><strong>5.1. Non-Guaranteed Transit:</strong> Delivery and transit times quoted are estimates only and are NOT GUARANTEED unless expressly stated in the Service description (e.g., "International Priority Express").</p>
+                     <p><strong>5.2. Circumstances Beyond Control (Force Majeure):</strong> The Carrier is not responsible for delays caused by events beyond its control, including but not limited to: Acts of God, war, acts of public enemies, weather conditions, aircraft or vehicle mechanical delays, acts of civil or military authority, or delays due to customs procedures.</p>
+                  </div>
+
+                  <div class="legal-section">
+                     <h4><span class="article-badge">VI</span>Charges and Payment</h4>
+                     <p><strong>6.1. Calculation:</strong> All charges are calculated based on the greater of the actual gross weight or the volumetric weight (dimensional weight), as assessed by the Carrier.</p>
+                     <p><strong>6.2. Duties and Taxes:</strong> If a shipment is sent DDU (Delivered Duty Unpaid) and the Consignee refuses to pay the required duties, the Shipper remains primarily liable for all customs fees, storage charges, and any costs associated with the return or disposal of the Goods.</p>
+                  </div>
+
+                  <div class="legal-section">
+                     <h4><span class="article-badge">VII</span>Governing Law and Jurisdiction</h4>
+                     <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of the applicable jurisdiction, without regard to its conflict of law provisions. Any dispute arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in the Carrier's primary operating region.</p>
+                  </div>
+               </div>
+
+               <div class="alert mt-4" style="background: #fff5f2; border: none; border-radius: 12px; padding: 30px; text-align: center;">
+                  <i class="bi bi-shield-check" style="font-size: 32px; color: #fd5523; display: block; margin-bottom: 15px;"></i>
+                  <h5 class="fw-bold mb-2">Agreement to Terms</h5>
+                  <p class="mb-0 text-muted">By clicking 'Proceed to Payment' or engaging our services, you acknowledge you have read, understood, and agreed to be bound by the Terms and Conditions effective on the date of booking.</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}

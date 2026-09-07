@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}FAQ | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">FAQ</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- FAQ Content -->
+   <section class="sec-padding bg-shade">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Support Center</span>
+            <h2 class="sec-title">Frequently Asked Questions</h2>
+         </div>
+
+         <div class="faq-search">
+            <div class="input-group input-group-lg">
+               <span class="input-group-text"><i class="bi bi-search"></i></span>
+               <input type="text" id="faq-search" class="form-control" placeholder="Search for keywords like 'customs', 'insurance', or 'delivery time'">
+            </div>
+         </div>
+
+         <div class="row justify-content-center">
+            <div class="col-lg-10">
+               {% regroup faqs by get_category_display as category_list %}
+               {% for category in category_list %}
+               <div class="faq-category">
+                  <h3 class="faq-category-title"><i class="{{ category.list.0.category_icon }}"></i> {{ category.grouper }}</h3>
+                  <div class="accordion" id="accordion-{{ forloop.counter }}">
+                     {% for faq in category.list %}
+                     <div class="accordion-item">
+                        <h2 class="accordion-header">
+                           <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ faq.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                              {{ faq.question }}
+                           </button>
+                        </h2>
+                        <div id="faqCollapse{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#accordion-{{ forloop.parentloop.counter }}">
+                           <div class="accordion-body">{{ faq.answer|safe }}</div>
+                        </div>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+               {% empty %}
+               <p class="text-center text-muted">FAQs are being updated — please check back shortly.</p>
+               {% endfor %}
+
+               <div class="support-cta mt-5">
+                  <i class="bi bi-headset"></i>
+                  <div>
+                     <h4 class="text-white">Didn't Find Your Answer?</h4>
+                     <p>If your question is complex or relates to a specific customs issue, our expert support team is ready to help you directly. <a href="{% url 'contact:page' %}">Contact Customer Support Now</a>.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+   const searchInput = document.getElementById('faq-search');
+   if (!searchInput) return;
+   searchInput.addEventListener('input', function () {
+      const term = searchInput.value.trim().toLowerCase();
+      document.querySelectorAll('.faq-category').forEach(function (category) {
+         let anyVisible = false;
+         category.querySelectorAll('.accordion-item').forEach(function (item) {
+            const text = item.textContent.toLowerCase();
+            const match = !term || text.includes(term);
+            item.style.display = match ? '' : 'none';
+            if (match) anyVisible = true;
+         });
+         category.style.display = anyVisible ? '' : 'none';
+      });
+   });
+});
+</script>
+{% endblock %}

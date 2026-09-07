@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Track Your Parcel | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Track Your Parcel</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tracking</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Track Form -->
+   <section class="sec-padding bg-shade">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Real-Time Tracking</span>
+            <h2 class="sec-title">Package Tracking</h2>
+         </div>
+
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="premium-track-wrap">
+                  <div class="premium-track-bg"></div>
+                  <div class="premium-track-inner">
+                     <div class="row align-items-center">
+                        <div class="col-lg-7">
+                           <div class="track-icon"><i class="bi bi-box-seam"></i></div>
+                           <h2>Track Your Shipment</h2>
+                           <p class="track-sub">Enter your tracking number to get real-time updates on your package location, estimated delivery, and shipment status.</p>
+
+                           <form method="POST" action="{% url 'tracking:page' %}" class="needs-validation" novalidate>
+                              {% csrf_token %}
+                              <div class="row g-4">
+                                 <div class="col-lg-6">
+                                    <label for="trackingNumber" class="form-label">Tracking ID</label>
+                                    <input type="text" id="trackingNumber" name="tracking_number" class="form-control" placeholder="e.g. AWB-8F9C9B9E" required value="{{ tracking_number }}">
+                                 </div>
+                                 <div class="col-lg-6">
+                                    <label for="emailTrack" class="form-label">Email Address <span style="color: rgba(255,255,255,0.4); font-weight: 400;">(Optional)</span></label>
+                                    <input type="email" id="emailTrack" name="email" class="form-control" placeholder="For delivery notifications">
+                                 </div>
+                                 <div class="col-lg-12 mt-4">
+                                    <button type="submit" class="btn-premium-track"><i class="bi bi-search"></i> Track &amp; Trace</button>
+                                 </div>
+                              </div>
+                           </form>
+
+                           <div class="track-features">
+                              <div class="track-feature"><i class="bi bi-shield-check"></i><span>Secure Tracking</span></div>
+                              <div class="track-feature"><i class="bi bi-lightning-charge"></i><span>Real-Time Updates</span></div>
+                              <div class="track-feature"><i class="bi bi-globe"></i><span>Global Coverage</span></div>
+                           </div>
+                        </div>
+                        <div class="col-lg-5 d-none d-lg-block">
+                           <div style="text-align: center; padding: 40px 20px;">
+                              <div style="width: 180px; height: 180px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                                 <i class="bi bi-geo-alt-fill" style="font-size: 64px; color: rgba(253, 85, 35, 0.6);"></i>
+                              </div>
+                              <p style="color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.6;">
+                                 Track shipments across 200+ countries with our advanced logistics network.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Results -->
+   <section class="sec-padding">
+      <div class="container">
+         {% if not searched %}
+         <div class="track-result-card">
+            <div class="track-empty">
+               <div class="empty-icon"><i class="bi bi-truck"></i></div>
+               <h4>Welcome to Parcel Tracking</h4>
+               <p>Your package's journey is just a search away. Enter your tracking number above to view the latest status and detailed timeline.</p>
+            </div>
+         </div>
+
+         {% elif not shipment %}
+         <div class="track-result-card">
+            <div class="track-empty">
+               <div class="empty-icon"><i class="bi bi-exclamation-circle"></i></div>
+               <h4>No Shipment Found</h4>
+               <p>We couldn't find a shipment matching "<strong>{{ tracking_number }}</strong>". Please double-check your tracking number, or <a href="{% url 'contact:page' %}">contact support</a> for help.</p>
+            </div>
+         </div>
+
+         {% else %}
+         <div class="gf-top-actions">
+            <a href="{% url 'tracking:page' %}"><i class="bi bi-arrow-left"></i> Track another shipment</a>
+         </div>
+
+         <div class="track-result-card">
+            <div class="gf-header-card">
+               <div class="gf-header-top">
+                  <div>
+                     <div class="gf-tracking-num"><i class="bi bi-upc-scan"></i>{{ shipment.tracking_number }}</div>
+                     <div class="gf-status-text">Status: <strong>{{ shipment.get_status_display }}</strong> &middot; {{ shipment.service_type }}</div>
+                  </div>
+                  <div class="gf-est-delivery">
+                     <div class="gf-est-label">Estimated Delivery</div>
+                     <div class="gf-est-date">{% if shipment.estimated_delivery %}{{ shipment.estimated_delivery|date:"M d, Y" }}{% else %}TBD{% endif %}</div>
+                  </div>
+               </div>
+               <div class="gf-progress-section">
+                  <div class="gf-progress-label">
+                     <span><i class="bi {{ shipment.get_status_display_icon }} me-1"></i>{{ shipment.get_status_display }}</span>
+                     <strong>{{ shipment.progress_percent }}%</strong>
+                  </div>
+                  <div class="gf-progress-bar-wrap">
+                     <div class="gf-progress-bar-fill" style="width: {{ shipment.progress_percent }}%;"></div>
+                  </div>
+               </div>
+               <div class="gf-locations-row">
+                  <div class="gf-loc-card">
+                     <div class="gf-loc-label"><i class="bi bi-geo-alt"></i>Origin</div>
+                     <div class="gf-loc-value">{{ shipment.origin }}</div>
+                  </div>
+                  <div class="gf-loc-card">
+                     <div class="gf-loc-label"><i class="bi bi-broadcast"></i>Current Location</div>
+                     <div class="gf-loc-value">{{ shipment.current_location }}</div>
+                  </div>
+                  <div class="gf-loc-card">
+                     <div class="gf-loc-label"><i class="bi bi-flag"></i>Destination</div>
+                     <div class="gf-loc-value">{{ shipment.destination }}</div>
+                  </div>
+               </div>
+            </div>
+
+            {% if has_map_points %}
+            <div class="gf-map-section">
+               <div class="gf-map-title"><i class="bi bi-map"></i>Route Map</div>
+               <div class="gf-map-container"><div id="routeMap"></div></div>
+            </div>
+            {% endif %}
+
+            <div class="gf-loc-info-section">
+               <div class="gf-loc-info-grid">
+                  <div class="gf-loc-info-item">
+                     <div class="label">Sender</div>
+                     <div class="value"><i class="bi bi-person"></i>{{ shipment.sender_name|default:"—" }}</div>
+                  </div>
+                  <div class="gf-loc-info-item">
+                     <div class="label">Receiver</div>
+                     <div class="value"><i class="bi bi-person-check"></i>{{ shipment.receiver_name|default:"—" }}</div>
+                  </div>
+                  <div class="gf-loc-info-item">
+                     <div class="label">Service Type</div>
+                     <div class="value"><i class="bi bi-truck"></i>{{ shipment.service_type }}</div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="gf-pkg-grid">
+               <div class="gf-pkg-grid-item">
+                  <div class="label">Weight</div>
+                  <div class="value">{{ shipment.weight|default:"—" }}</div>
+               </div>
+               <div class="gf-pkg-grid-item">
+                  <div class="label">Booked On</div>
+                  <div class="value">{{ shipment.created_at|date:"M d, Y" }}</div>
+               </div>
+            </div>
+
+            <div class="track-timeline-wrap">
+               <div class="track-timeline-title">Shipment Timeline</div>
+               <div class="gf-timeline-list">
+                  {% for event in shipment.events.all %}
+                  <div class="gf-timeline-item {% if forloop.last %}active{% else %}done{% endif %}">
+                     <div class="gf-timeline-dot"><i class="bi {% if forloop.last %}bi-geo-alt-fill{% else %}bi-check{% endif %}"></i></div>
+                     <div class="gf-timeline-content">
+                        <div class="gf-timeline-header">
+                           <span class="gf-timeline-status">{{ event.status }}</span>
+                           {% if forloop.last %}<span class="gf-timeline-badge {% if shipment.status == 'delivered' %}delivered{% elif shipment.status == 'exception' %}hold{% else %}pending{% endif %}">{{ shipment.get_status_display }}</span>{% endif %}
+                        </div>
+                        <div class="gf-timeline-date">{{ event.timestamp|date:"M d, Y — g:i A" }}</div>
+                        {% if event.location %}<div class="gf-timeline-location"><i class="bi bi-geo-alt"></i> {{ event.location }}</div>{% endif %}
+                        {% if event.description %}<div class="gf-timeline-note">{{ event.description }}</div>{% endif %}
+                     </div>
+                  </div>
+                  {% empty %}
+                  <p class="text-muted">No tracking events yet — check back soon.</p>
+                  {% endfor %}
+               </div>
+            </div>
+
+            <div class="gf-action-bar">
+               <a href="{% url 'contact:page' %}" class="btn btn-outline-dark btn-sm"><i class="bi bi-headset me-1"></i> Need Help?</a>
+               <a href="{% url 'quotes:page' %}" class="btn btn-primary btn-sm"><i class="bi bi-box-seam me-1"></i> Ship Another Package</a>
+            </div>
+         </div>
+         {% endif %}
+      </div>
+   </section>
+
+{% endblock %}
+
+{% block extra_css %}
+{% if has_map_points %}
+<link rel="stylesheet" href="{% static 'vendor/leaflet/leaflet.css' %}">
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+{% if has_map_points %}
+<script src="{% static 'vendor/leaflet/leaflet.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+   const points = {{ map_points_json|safe }};
+   if (!points.length) return;
+   const map = L.map('routeMap');
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, attribution: '&copy; OpenStreetMap'
+   }).addTo(map);
+   const bounds = [];
+   points.forEach(function (p) {
+      L.marker([p.lat, p.lng]).addTo(map).bindPopup('<strong>' + p.label + '</strong><br>' + p.status);
+      bounds.push([p.lat, p.lng]);
+   });
+   if (points.length > 1) {
+      L.polyline(bounds, { color: '#fd5523', weight: 3, dashArray: '6 8' }).addTo(map);
+      map.fitBounds(bounds, { padding: [40, 40] });
+   } else {
+      map.setView(bounds[0], 6);
+   }
+});
+</script>
+{% endif %}
+{% endblock %}

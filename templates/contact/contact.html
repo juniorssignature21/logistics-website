@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact Us | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Contact Us</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Contact Widgets -->
+   <section class="contact-widgets bg-shade sec-padding">
+      <div class="container">
+         <div class="sec-intro mx-auto text-center">
+            <span class="sub-title fadeInUp">Contact Us</span>
+            <h2 class="sec-title">Start Your Journey with Us</h2>
+         </div>
+         <div class="row pt-3">
+            <div class="col-lg-4">
+               <div class="contact-card d-flex">
+                  <span class="icon bg-shade rounded-3"><i class="bi bi-headset"></i></span>
+                  <div class="contact-info">
+                     <ul>
+                        <li><strong>Phone :</strong> <a href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a></li>
+                        <li><strong>Email :</strong> <a href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a></li>
+                     </ul>
+                     <a href="mailto:{{ site_settings.email }}" class="ct-url">Send your mail <i class="bi bi-chevron-right"></i></a>
+                  </div>
+                  <h4 class="card-meta">REACH US</h4>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="contact-card d-flex">
+                  <span class="icon bg-shade rounded-3"><i class="bi bi-clock"></i></span>
+                  <div class="contact-info">
+                     <ul>
+                        <li><strong>Mon-Sat :</strong> 07:00 am to 10:00 pm</li>
+                        <li><strong>Sunday : </strong>Closed</li>
+                     </ul>
+                     <a href="#contact-form" class="ct-url">MAKE AN APPOINTMENT <i class="bi bi-chevron-right"></i></a>
+                  </div>
+                  <h4 class="card-meta">OFFICE HOURS</h4>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="contact-card d-flex">
+                  <span class="icon bg-shade rounded-3"><i class="bi bi-geo-alt"></i></span>
+                  <div class="contact-info">
+                     <ul><li>{{ site_settings.address }}</li></ul>
+                     <a href="#map-tabs" class="ct-url">VIEW ON MAP <i class="bi bi-chevron-right"></i></a>
+                  </div>
+                  <h4 class="card-meta">LOCATION</h4>
+               </div>
+            </div>
+            <div class="col-lg-12 mt-5 text-center">
+               <h6>Social Connect:</h6>
+               <div class="social-share mt-3">
+                  {% if site_settings.facebook_url %}<a href="{{ site_settings.facebook_url }}" target="_blank" rel="noopener"><i class="bi bi-facebook"></i></a>{% endif %}
+                  {% if site_settings.twitter_url %}<a href="{{ site_settings.twitter_url }}" target="_blank" rel="noopener"><i class="bi bi-twitter-x"></i></a>{% endif %}
+                  {% if site_settings.instagram_url %}<a href="{{ site_settings.instagram_url }}" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>{% endif %}
+                  {% if site_settings.youtube_url %}<a href="{{ site_settings.youtube_url }}" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>{% endif %}
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Contact Form & Map -->
+   <section class="contact-sec sec-padding" id="contact-form">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title fadeInUp">Get In Touch</span>
+            <h2 class="sec-title">Reach out anytime for help!</h2>
+         </div>
+      </div>
+      <div class="container-fluid">
+         <div class="row contact-form-wrap">
+            <div class="col-lg-4" id="map-tabs">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49668.99316628675!2d113.91297436858135!3d22.290486893598978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403e2f3cc46c69d%3A0xf9f590821892369e!2sHong%20Kong%20International%20Airport!5e0!3m2!1sen!2sbd!4v1767538516269!5m2!1sen!2sbd" width="100%" height="610" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="col-lg-8">
+               <div class="contact-form round" style="background: url('{% static 'images/form-bg2.jpg' %}') no-repeat center center / cover;">
+                  <div class="form-inner round">
+                     <form id="ajax-contact-form" method="post" action="{% url 'contact:submit' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                           <div class="form-group col-lg-12">
+                              <input type="text" id="name" name="name" class="form-control" placeholder="Your name" required>
+                              <i class="bi bi-person"></i>
+                           </div>
+                           <div class="form-group col-lg-6">
+                              <input type="email" id="email" name="email" class="form-control" placeholder="Your email" required>
+                              <i class="bi bi-envelope"></i>
+                           </div>
+                           <div class="form-group col-lg-6">
+                              <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone no" required>
+                              <i class="bi bi-telephone"></i>
+                           </div>
+                           <div class="form-group col-lg-6">
+                              <select class="form-control tv-select" id="ftype" name="inquiry_type" required>
+                                 <option value="">Select Inquiry Type</option>
+                                 {% for value, label in form.fields.inquiry_type.choices %}
+                                 {% if value %}<option value="{{ value }}">{{ label }}</option>{% endif %}
+                                 {% endfor %}
+                              </select>
+                           </div>
+                           <div class="form-group col-lg-6">
+                              <select class="form-control tv-select" id="wight" name="urgency" required>
+                                 <option value="">Select Priority</option>
+                                 {% for value, label in form.fields.urgency.choices %}
+                                 {% if value %}<option value="{{ value }}">{{ label }}</option>{% endif %}
+                                 {% endfor %}
+                              </select>
+                           </div>
+                           <div class="form-group col-lg-12">
+                              <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" required>
+                              <i class="bi bi-chat-left-text"></i>
+                           </div>
+                           <div class="form-group col-lg-12">
+                              <textarea id="message" name="message" class="form-control" placeholder="Message" rows="6"></textarea>
+                              <i class="bi bi-pencil"></i>
+                           </div>
+                           <div class="col-12 mt-3">
+                              <button type="submit" id="contact-submit-btn" class="btn btn-primary w-100">
+                                 Submit Request <i class="bi bi-chevron-right"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/sweetalert2/sweetalert2.min.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'vendor/sweetalert2/sweetalert2.all.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+   const form = document.getElementById('ajax-contact-form');
+   const btn = document.getElementById('contact-submit-btn');
+   if (!form) return;
+   form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const original = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending…';
+
+      fetch(form.action, {
+         method: 'POST',
+         headers: { 'X-Requested-With': 'XMLHttpRequest' },
+         body: new FormData(form),
+      })
+         .then(function (res) { return res.json(); })
+         .then(function (data) {
+            btn.disabled = false;
+            btn.innerHTML = original;
+            if (data.success) {
+               form.reset();
+               Swal.fire({
+                  icon: 'success', title: 'Message Sent!', text: data.message,
+                  confirmButtonColor: '#fd5523', timer: 5000, timerProgressBar: true,
+               });
+            } else {
+               Swal.fire({ icon: 'error', title: 'Oops...', text: data.message, confirmButtonColor: '#fd5523' });
+            }
+         })
+         .catch(function () {
+            btn.disabled = false;
+            btn.innerHTML = original;
+            Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong. Please try again.', confirmButtonColor: '#fd5523' });
+         });
+   });
+});
+</script>
+{% endblock %}

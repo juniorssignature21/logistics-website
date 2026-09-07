@@ -1,0 +1,582 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ site_settings.site_name }} | Transport &amp; Logistics{% endblock %}
+{% block content %}
+
+   <!-- Hero Section -->
+   <section class="hero-3 jarallax" data-parallax data-speed=".8">
+      <img src="{% static 'images/home3-bg.jpg' %}" class="jarallax-img" alt="Home Banner">
+      <div class="parallax-overly"></div>
+      <div class="container ct-container">
+         <div class="row align-items-center">
+            <div class="col-lg-4">
+               <div class="hero-content">
+                  <span class="lead text-uppercase round">Plan, transport and finish</span>
+                  <h1 class="display-1 text-info fw-bold">Choose Your <br>Next Big Step</h1>
+                  <p>Streamlining your logistics with transportation solutions timely deliveries and exceptional service worldwide.</p>
+                  <div class="hero-cta d-sm-flex align-items-center">
+                     <a href="{% url 'tracking:page' %}" class="btn btn-primary">Track Shipment <i class="fa fa-arrow-right"></i></a>
+                     <div class="d-flex align-items-center ms-sm-4">
+                        <img src="{% static 'images/clients.png' %}" alt="">
+                        <div class="stat-count d-flex gap-4 align-items-center">
+                           <span class="icon-lg bg-info fw-bold rounded-circle text-primary">2.5M</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-8">
+               <div class="hero-media">
+                  <img src="{% static 'images/hero-3.png' %}" alt="" class="img-fluid">
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Services Section -->
+   <section class="services-3 sec-padding overflow-hidden">
+      <div class="container ct-container">
+         <div class="sec-intro mx-auto text-center">
+            <span class="sub-title fadeInUp">
+               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="18" fill="none" viewBox="0 0 30 18"><path fill="#fd5523" d="M8.125 15.429h-2.5a.62.62 0 0 1-.442-.189.65.65 0 0 1 0-.909.62.62 0 0 1 .442-.188h2.5c.166 0 .325.068.442.188a.65.65 0 0 1 0 .91.62.62 0 0 1-.442.188m20.313 0h-1.563a.62.62 0 0 1-.442-.189.65.65 0 0 1 0-.909.62.62 0 0 1 .442-.188h1.044l.842-4.618c-.011-2.364-1.973-4.382-4.386-4.382h-4.104l-1.989 9h3.593c.166 0 .325.068.442.188a.653.653 0 0 1 0 .91.62.62 0 0 1-.442.188H17.5a.61.61 0 0 1-.488-.242.65.65 0 0 1-.122-.543L19.162 4.36a.65.65 0 0 1 .22-.361.6.6 0 0 1 .39-.14h4.603C27.476 3.857 30 6.452 30 9.642l-.949 5.261a.65.65 0 0 1-.214.377.6.6 0 0 1-.4.148"/><path fill="#fd5523" d="M24.375 18c-1.722 0-3.125-1.441-3.125-3.214s1.403-3.215 3.125-3.215c1.723 0 3.125 1.442 3.125 3.215S26.098 18 24.375 18m0-5.143c-1.034 0-1.875.866-1.875 1.929s.841 1.928 1.875 1.928 1.875-.865 1.875-1.928-.841-1.929-1.875-1.929M10.625 18C8.903 18 7.5 16.559 7.5 14.786s1.403-3.215 3.125-3.215c1.723 0 3.125 1.442 3.125 3.215S12.348 18 10.625 18m0-5.143c-1.034 0-1.875.866-1.875 1.929s.841 1.928 1.875 1.928 1.875-.865 1.875-1.928c0-1.064-.841-1.929-1.875-1.929m-2.5-9h-5a.62.62 0 0 1-.442-.188.65.65 0 0 1 0-.91.62.62 0 0 1 .442-.188h5c.166 0 .325.068.442.189a.65.65 0 0 1 0 .909.62.62 0 0 1-.442.188m0 3.857h-6.25a.62.62 0 0 1-.442-.188.65.65 0 0 1 0-.91.62.62 0 0 1 .442-.187h6.25c.166 0 .325.067.442.188a.65.65 0 0 1 0 .909.62.62 0 0 1-.442.188m0 3.857h-7.5a.62.62 0 0 1-.442-.188.65.65 0 0 1 0-.909.62.62 0 0 1 .442-.188h7.5c.166 0 .325.067.442.188a.65.65 0 0 1 0 .91.62.62 0 0 1-.442.187"/><path fill="#fd5523" d="M17.5 15.429h-4.375a.62.62 0 0 1-.442-.189.65.65 0 0 1 0-.909.62.62 0 0 1 .442-.188H17l2.84-12.857H5.625a.62.62 0 0 1-.442-.189.65.65 0 0 1 0-.909A.62.62 0 0 1 5.625 0h15a.61.61 0 0 1 .488.241.65.65 0 0 1 .122.543L18.11 14.927a.65.65 0 0 1-.22.36.6.6 0 0 1-.39.142"/></svg>
+               What to expect
+            </span>
+            <h2 class="sec-title">Boost Your Business Efficiency</h2>
+         </div>
+         <div class="row">
+            {% for bg, icon, title, text in home_service_tiles %}
+            <div class="col-xl-3 col-md-6">
+               <div class="service-entry bg-cover round" style="background-image: url('{% static bg %}');">
+                  <div class="serv-txt rounded-4">
+                     <div class="serv-heading">
+                        <span class="serv-icon"><img src="{% static icon %}" alt="icon"></span>
+                        <div class="d-flex align-items-center justify-content-between serv-title">
+                           <h3 class="display-4"><a href="{% url 'services' %}">{{ title }}</a></h3>
+                           <span><i class="fa-solid fa-angles-right"></i></span>
+                        </div>
+                     </div>
+                     <p>{{ text }}</p>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </section>
+
+   <!-- Text Marquee -->
+   <div class="text-slide-sec3 overflow-hidden">
+      <div class="marque-active">
+         <div class="text-slide-wrap">
+            <div class="text-item"><img src="{% static 'images/star-1.png' %}" alt=""><h3 class="display-1">Transport</h3></div>
+            <div class="text-item"><img src="{% static 'images/star-1.png' %}" alt=""><h3 class="display-1">Logistic</h3></div>
+            <div class="text-item"><img src="{% static 'images/star-1.png' %}" alt=""><h3 class="display-1">Global Export</h3></div>
+            <div class="text-item"><img src="{% static 'images/star-1.png' %}" alt=""><h3 class="display-1">Transport</h3></div>
+            <div class="text-item"><img src="{% static 'images/star-1.png' %}" alt=""><h3 class="display-1">Global Import</h3></div>
+         </div>
+      </div>
+   </div>
+
+   <!-- About Section -->
+   <section class="about-sec3 sec-padding bg-cover" style="background-image: url('{% static 'images/about-bg.jpg' %}');">
+      <div class="container">
+         <div class="row">
+            <div class="col-xl-5 col-lg-7 mx-lg-auto">
+               <div class="about-media3 position-relative">
+                  <div class="feat-img position-relative">
+                     <img src="{% static 'images/about-ft.jpg' %}" class="img-fluid round" alt="about">
+                     <div class="experien-stat">
+                        <p class="text-info m-0"><span class="purecounter" data-purecounter-end="25" data-purecounter-duration="0">25</span>+ Years Experience</p>
+                     </div>
+                  </div>
+                  <div class="d-flex ab-sm-ft align-items-center gap-4">
+                     <img class="round img-fluid" src="{% static 'images/about-ft2.png' %}" alt="about">
+                     <img class="img-fluid" src="{% static 'images/about-ft3.png' %}" alt="about">
+                  </div>
+                  <div class="ab-stat2"><img src="{% static 'images/ab-st2.png' %}" alt=""></div>
+               </div>
+            </div>
+            <div class="col-xl-7">
+               <div class="about-content3">
+                  <span class="sub-title fadeInUp">About Our Company</span>
+                  <h2 class="sec-title">Our services increase the productivity of your work.</h2>
+                  <p>Our global logistics expertise, advanced supply chain technology &amp; customized logistics solutions will help you analyze, develop, and implement successful strategies.</p>
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="mission-tab" data-bs-toggle="tab" data-bs-target="#mission" type="button" role="tab">Our Mission</button>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="vission-tab" data-bs-toggle="tab" data-bs-target="#vission" type="button" role="tab">Our Vision</button>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">Our History</button>
+                     </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                     <div class="tab-pane fade show active" id="mission" role="tabpanel">
+                        <div class="d-sm-flex gap-4 mb-3">
+                           <div class="tab-img"><img src="{% static 'images/ab-t1.png' %}" alt="tab" class="rounded-4"></div>
+                           <div class="tab-txt">
+                              <p>Our mission is to be a forward-thinking logistics consultancy with over 25 years of industry experience.</p>
+                              <p>We specialize in delivering strategic guidance and project development support.</p>
+                           </div>
+                        </div>
+                        <h3 class="display-6">We specialize in delivering strategic guidance, project development support.</h3>
+                     </div>
+                     <div class="tab-pane fade" id="vission" role="tabpanel">
+                        <div class="d-sm-flex gap-4 mb-3">
+                           <div class="tab-img"><img src="{% static 'images/ab-t1.png' %}" alt="tab" class="rounded-4"></div>
+                           <div class="tab-txt">
+                              <p>Our vision is to be the most trusted global logistics partner for businesses of all sizes.</p>
+                              <p>We specialize in delivering strategic guidance and project development support.</p>
+                           </div>
+                        </div>
+                        <h3 class="display-6">We specialize in delivering strategic guidance, project development support.</h3>
+                     </div>
+                     <div class="tab-pane fade" id="history" role="tabpanel">
+                        <div class="d-sm-flex gap-4 mb-3">
+                           <div class="tab-img"><img src="{% static 'images/ab-t1.png' %}" alt="tab" class="rounded-4"></div>
+                           <div class="tab-txt">
+                              <p>Founded over 25 years ago, we have grown from a local carrier to a global logistics network.</p>
+                              <p>We specialize in delivering strategic guidance and project development support.</p>
+                           </div>
+                        </div>
+                        <h3 class="display-6">We specialize in delivering strategic guidance, project development support.</h3>
+                     </div>
+                  </div>
+                  <div class="d-sm-flex align-items-center about-cta gap-5 mt-5">
+                     <a href="{% url 'about' %}" class="btn btn-primary">About Us <i class="fa fa-arrow-right"></i><span></span></a>
+                     <div class="quick-call d-flex align-items-center">
+                        <span class="bg-dark icon-lg rounded-circle text-info"><i class="fa-solid fa-phone-volume"></i></span>
+                        <div class="conn-txt ms-3">
+                           <p class="m-0">Call Us Any Time:</p>
+                           <a class="h6 text-primary" href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Stats Section -->
+   <section class="stat-sec3 jarallax sec-padding" data-jarallax data-speed=".4">
+      <img src="{% static 'images/stat-bg2.jpg' %}" alt="" class="jarallax-img">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-6 offset-lg-6">
+               <div class="stat-entries d-flex flex-wrap align-items-center bg-info round justify-content-between">
+                  <div class="s-item">
+                     <h3 class="display-1 fw-bold"><span class="purecounter" data-purecounter-end="98">98</span>%</h3>
+                     <p>Faster Order Processing</p>
+                  </div>
+                  <div class="s-item">
+                     <h3 class="display-1 fw-bold"><span class="purecounter" data-purecounter-end="97"></span>%</h3>
+                     <p>Fulfillment Accuracy</p>
+                  </div>
+                  <div class="s-item">
+                     <h3 class="display-1 fw-bold"><span class="purecounter" data-purecounter-end="20000" data-purecounter-currency=" ">300</span></h3>
+                     <p>Orders Shipped Annually</p>
+                  </div>
+                  <div class="s-item">
+                     <a href="{% url 'contact:page' %}" class="btn btn-primary">Contact Us <i class="fa fa-arrow-right"></i><span></span></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Brands Section -->
+   <div class="brands-sec3 overflow-hidden">
+      <div class="container-fluid p-0">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="brands-carousel2 swiper">
+                  <div class="swiper-wrapper">
+                     <div class="swiper-slide"><img src="{% static 'images/bra1.png' %}" alt="Brand"></div>
+                     <div class="swiper-slide"><img src="{% static 'images/bra2.png' %}" alt="Brand"></div>
+                     <div class="swiper-slide"><img src="{% static 'images/bra3.png' %}" alt="Brand"></div>
+                     <div class="swiper-slide"><img src="{% static 'images/bra4.png' %}" alt="Brand"></div>
+                     <div class="swiper-slide"><img src="{% static 'images/bra5.png' %}" alt="Brand"></div>
+                     <div class="swiper-slide"><img src="{% static 'images/bra1.png' %}" alt="Brand"></div>
+                     <div class="swiper-slide"><img src="{% static 'images/bra2.png' %}" alt="Brand"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Process Section -->
+   <section class="process-sec3 sec-padding">
+      <div class="container">
+         <div class="mb-5 pb-5 text-center">
+            <span class="sub-title fadeInUp">How It Works</span>
+            <h2 class="sec-title">Valuable Process For Our Customers</h2>
+         </div>
+         <div class="row">
+            <div class="col-md-4">
+               <div class="process-entry text-center fadeInUp" data-delay=".2">
+                  <span class="icon mx-auto rounded-circle">
+                     <span class="count">01</span>
+                     <img src="{% static 'images/pros1.png' %}" alt="Icon">
+                  </span>
+                  <h3 class="display-4">Get a Quote</h3>
+                  <p>Simply provide details about your shipment, and we'll give you a transparent quote.</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="process-entry text-center fadeInUp" data-delay=".4">
+                  <span class="icon mx-auto rounded-circle">
+                     <span class="count">02</span>
+                     <img src="{% static 'images/pros2.png' %}" alt="Icon">
+                  </span>
+                  <h3 class="display-4">Book Your Shipment</h3>
+                  <p>Confirm your booking and let us handle the logistics from pickup to delivery.</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="process-entry text-center fadeInUp" data-delay=".6">
+                  <span class="icon mx-auto rounded-circle">
+                     <span class="count">03</span>
+                     <img src="{% static 'images/pros3.png' %}" alt="Icon">
+                  </span>
+                  <h3 class="display-4">Delivery &amp; Support</h3>
+                  <p>Track your shipment in real-time and receive 24/7 support throughout the journey.</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Solution Section -->
+   <section class="solution-sec bg-shade overflow-hidden sec-padding position-relative">
+      <img src="{% static 'images/solution-sh.png' %}" alt="" class="anim-img start-0 moveXS left-bottom">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-5">
+               <div class="sol-box">
+                  <div class="sol-media d-flex gap-5">
+                     <img src="{% static 'images/sol1.jpg' %}" alt="Solution" class="img-fluid round">
+                     <img src="{% static 'images/sol2.jpg' %}" alt="Solution" class="img-fluid round">
+                  </div>
+                  <a class="video-play-btn bg-info rounded-circle text-primary icon" data-fancybox="video-gallery" href="https://www.youtube.com/watch?v=wQMx7wc4jh8">
+                     <span><i class="fa fa-play"></i></span>
+                  </a>
+               </div>
+            </div>
+            <div class="col-lg-7 ps-lg-5">
+               <div class="sol-content">
+                  <div class="sol-header mb-5">
+                     <span class="sub-title fadeInUp">Our Solutions</span>
+                     <h2 class="sec-title">Logistics service outsourcing's advantages in 2025</h2>
+                  </div>
+                  <div class="solution-wrap d-flex align-items-center justify-content-between">
+                     <div class="solution-card" style="background-image: url('{% static 'images/solution-bg.png' %}');">
+                        <div class="sol-icon"><i class="fa-solid fa-ship fa-2x" style="color:#fd5523;"></i></div>
+                        <h3 class="display-4">Shipping Services</h3>
+                        <p>Save money by optimizing your shipments.</p>
+                     </div>
+                     <div class="solution-card" style="background-image: url('{% static 'images/solution-bg.png' %}');">
+                        <div class="sol-icon"><i class="fa-solid fa-boxes-stacked fa-2x" style="color:#fd5523;"></i></div>
+                        <h3 class="display-4">Distribution Plan</h3>
+                        <p>Save money by optimizing your shipments.</p>
+                     </div>
+                     <div class="solution-card" style="background-image: url('{% static 'images/solution-bg.png' %}');">
+                        <div class="sol-icon"><i class="fa-solid fa-location-dot fa-2x" style="color:#fd5523;"></i></div>
+                        <h3 class="display-4">GPS Tracking</h3>
+                        <p>Save money by optimizing your shipments.</p>
+                     </div>
+                     <div class="solution-card" style="background-image: url('{% static 'images/solution-bg.png' %}');">
+                        <div class="sol-icon"><i class="fa-solid fa-truck fa-2x" style="color:#fd5523;"></i></div>
+                        <h3 class="display-4">Flexible Shipment</h3>
+                        <p>Save money by optimizing your shipments.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Video Section -->
+   <section class="video-sec3 sec-padding jarallax" data-jarallax data-speed=".4">
+      <img class="jarallax-img" src="{% static 'images/video1.jpg' %}" alt="">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="video-content">
+                  <a class="play-btn bg-info rounded-circle text-primary icon-xl" data-fancybox="video-gallery" href="https://www.youtube.com/watch?v=wQMx7wc4jh8">
+                     <span><i class="fa fa-play"></i></span>
+                  </a>
+                  <h2 class="display-1 fw-bold">Change the Experience of Transportation</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Why Us + Quick Quote -->
+   <section class="why-us3 sec-padding jarallax" data-jarallax data-speed=".4">
+      <img src="{% static 'images/whu-us-bg.jpg' %}" class="jarallax-img" alt="">
+      <img src="{% static 'images/slide-anim.png' %}" class="abs-img bottom-0" alt="">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-6">
+               <div class="why-txt">
+                  <div class="sec-intro">
+                     <span class="sub-title fadeInUp">Why We're Special</span>
+                     <h2 class="sec-title text-white">We Want to Make a Good Impact on Your Business</h2>
+                     <p>At {{ site_settings.site_name }}, we are committed to revolutionizing the transportation industry through innovative solutions and unparalleled service.</p>
+                  </div>
+                  <div class="success-stat">
+                     <div class="progress">
+                        <div class="meta">Shipping</div>
+                        <div class="progress-bar" data-progress="90%" style="width: 90%;"><span>90%</span></div>
+                     </div>
+                     <div class="progress">
+                        <div class="meta">Successful Delivery</div>
+                        <div class="progress-bar" data-progress="95%" style="width: 95%;"><span>95%</span></div>
+                     </div>
+                     <div class="progress">
+                        <div class="meta">Management</div>
+                        <div class="progress-bar" data-progress="91%" style="width: 91%;"><span>91%</span></div>
+                     </div>
+                  </div>
+                  <div class="quick-call d-flex align-items-center">
+                     <span class="bg-info icon-lg rounded-circle text-primary"><i class="fa-solid fa-phone-volume"></i></span>
+                     <div class="conn-txt ms-3">
+                        <p class="m-0">Call Us Any Time:</p>
+                        <a class="h6 text-info" href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6" id="request-quote">
+               <div class="quote-form rounded-4 fadeInUp">
+                  <h3>Request Quote Form</h3>
+                  <form id="ajax-contact" method="post" action="{% url 'quotes:quick_submit' %}">
+                     {% csrf_token %}
+                     <div class="row">
+                        <div class="col-lg-6 form-group">
+                           <label for="qq-name">Full Name</label>
+                           <input id="qq-name" name="name" type="text" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="qq-email">Email Address</label>
+                           <input id="qq-email" name="email" type="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="qq-phone">Phone</label>
+                           <input id="qq-phone" name="phone" type="text" class="form-control" placeholder="+1 555 0000" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="qq-city">Delivery City</label>
+                           <select class="form-control tv-select" name="city_deliver" id="qq-city" required>
+                              {% for value, label in quick_quote_form.fields.city_deliver.choices %}
+                              <option value="{{ value }}">{{ label }}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="qq-ftype">Freight Type</label>
+                           <select class="form-control tv-select" name="freight_type" id="qq-ftype">
+                              {% for value, label in quick_quote_form.fields.freight_type.choices %}
+                              <option value="{{ value }}">{{ label }}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="qq-weight">Weight</label>
+                           <input type="text" id="qq-weight" name="weight" class="form-control" placeholder="Weight (kg)">
+                        </div>
+                        <div class="col-12 mt-3">
+                           <button class="btn btn-primary" type="submit">Submit Request <i class="fa fa-arrow-right"></i></button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Testimonials / Review Section -->
+   <section id="testimonials" class="review-sec3 bg-shade sec-padding">
+      <div class="container">
+         <div class="sec-intro mx-auto text-center">
+            <span class="sub-title fadeInUp">Client Reviews</span>
+            <h2 class="sec-title">What Our Clients Say About Us</h2>
+         </div>
+
+         <div class="row mt-4" id="testimonial-container">
+            {% for story in stories %}
+            <div class="col-lg-4 col-md-6 mb-4">
+               <div class="review-entry">
+                  <div class="rev-content position-relative bg-white rounded-4">
+                     <p>"{{ story.testimonial }}"</p>
+                     <div class="ratings">
+                        {% for _ in "12345" %}{% if forloop.counter <= story.rating %}<i class="fa fa-star"></i>{% endif %}{% endfor %}
+                     </div>
+                     <div class="rev-icon icon bg-primary position-absolute">
+                        <img src="{% static 'images/icons/quote-left.svg' %}" alt="">
+                     </div>
+                  </div>
+                  <div class="rev-author d-flex align-items-center">
+                     <div class="author-thumb icon me-3">
+                        {% if story.profile_image %}
+                        <img src="{{ story.profile_image.url }}" alt="{{ story.client_name }}">
+                        {% else %}
+                        <img src="{% static 'images/sample-testimonial.jpg' %}" alt="{{ story.client_name }}">
+                        {% endif %}
+                     </div>
+                     <div class="author-info">
+                        <h3 class="mb-0 display-5">{{ story.client_name }}</h3>
+                        <span>{{ story.client_location }}</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+               <p class="text-muted">Be the first to share your experience with us below!</p>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </section>
+
+   <!-- Share Your Story -->
+   <section id="entry" class="py-5" style="background-color: #F5FBFF;">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-8">
+               <div class="card form-card p-4 p-md-5">
+                  <h3 class="text-center fw-bolder mb-2" style="color: #6d0000;">
+                     <i class="fa-solid fa-star me-2"></i> Share Your Story!
+                  </h3>
+                  <p class="text-center text-muted mb-4">Did your critical shipment arrive flawlessly? Share your experience and help others choose reliability.</p>
+
+                  <form method="POST" action="{% url 'stories:submit' %}" enctype="multipart/form-data" class="needs-validation" novalidate>
+                     {% csrf_token %}
+                     <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                           <label for="client_name" class="form-label fw-bold">Full Name</label>
+                           <input type="text" class="form-control" id="client_name" name="client_name" placeholder="Your full name" required minlength="2">
+                        </div>
+                        <div class="col-md-6">
+                           <label for="client_location" class="form-label fw-bold">Your Location (City, Country)</label>
+                           <input type="text" class="form-control" id="client_location" name="client_location" placeholder="e.g. Lagos, Nigeria" required>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <label for="product_service" class="form-label fw-bold">Service Used</label>
+                        <select class="form-select" id="product_service" name="product_service" required>
+                           <option selected disabled value="">Which service did you use?</option>
+                           <option value="express">Express International</option>
+                           <option value="standard">Standard Freight</option>
+                           <option value="domestic">Domestic Next-Day</option>
+                        </select>
+                     </div>
+                     <div class="mb-3">
+                        <label for="testimonial" class="form-label fw-bold">Your Story / Testimonial</label>
+                        <textarea class="form-control" id="testimonial" name="testimonial" rows="4" required minlength="20" maxlength="500" placeholder="Describe the service: speed, security, tracking experience..."></textarea>
+                     </div>
+                     <div class="row g-3 mb-4 align-items-center">
+                        <div class="col-md-6">
+                           <label for="language" class="form-label fw-bold">Language</label>
+                           <select class="form-select" id="language" name="language" required>
+                              <option value="en" selected>English</option>
+                              <option value="es">Spanish (Español)</option>
+                              <option value="fr">French (Français)</option>
+                              <option value="de">German (Deutsch)</option>
+                              <option value="pt">Portuguese (Português)</option>
+                              <option value="ar">Arabic (العربية)</option>
+                              <option value="zh">Chinese (简体中文)</option>
+                              <option value="ru">Russian (Русский)</option>
+                              <option value="hi">Hindi (हिन्दी)</option>
+                           </select>
+                        </div>
+                        <div class="col-md-6">
+                           <label class="form-label d-block fw-bold">Your Rating</label>
+                           <div class="star-rating fs-3">
+                              <svg class="active" data-rating="1" width="30" height="30" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                              <svg class="active" data-rating="2" width="30" height="30" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                              <svg class="active" data-rating="3" width="30" height="30" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                              <svg class="active" data-rating="4" width="30" height="30" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                              <svg class="active" data-rating="5" width="30" height="30" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                           </div>
+                           <input type="hidden" name="rating" id="rating-value" value="5">
+                        </div>
+                     </div>
+                     <div class="mb-4">
+                        <label class="form-label fw-bold">Upload Your Photo (Optional)</label>
+                        <div class="file-drop-zone" id="dropZone">
+                           <input type="file" id="profileImage" name="profile_image" accept="image/jpeg, image/png, image/webp">
+                           <div class="d-flex flex-column align-items-center">
+                              <i class="bi bi-cloud-arrow-up file-drop-icon"></i>
+                              <p class="mb-1 text-dark-emphasis fw-bold">Drag &amp; Drop or Click to Upload</p>
+                              <p class="small text-muted mb-0">JPEG, PNG, or WEBP (Max 5MB)</p>
+                              <p class="file-name-display d-none" id="fileNameDisplay"></p>
+                           </div>
+                        </div>
+                        <div class="image-preview text-center" id="imagePreview">
+                           <img src="#" alt="Preview" class="img-fluid" id="previewImage">
+                        </div>
+                     </div>
+                     <div class="d-grid">
+                        <button type="submit" class="btn btn-lg text-white fw-bold btn-gradient shadow-lg">
+                           <i class="fa-solid fa-paper-plane me-2"></i> SHARE MY STORY
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+   // Star rating widget for the Share Your Story form
+   const stars = document.querySelectorAll('.star-rating svg');
+   const ratingInput = document.getElementById('rating-value');
+   stars.forEach(function (star) {
+      star.addEventListener('click', function () {
+         const value = parseInt(star.getAttribute('data-rating'), 10);
+         if (ratingInput) ratingInput.value = value;
+         stars.forEach(function (s) {
+            s.classList.toggle('active', parseInt(s.getAttribute('data-rating'), 10) <= value);
+         });
+      });
+   });
+
+   // Photo drop-zone preview
+   const fileInput = document.getElementById('profileImage');
+   const fileNameDisplay = document.getElementById('fileNameDisplay');
+   const imagePreview = document.getElementById('imagePreview');
+   const previewImage = document.getElementById('previewImage');
+   if (fileInput) {
+      fileInput.addEventListener('change', function () {
+         const file = fileInput.files[0];
+         if (!file) return;
+         fileNameDisplay.textContent = file.name;
+         fileNameDisplay.classList.remove('d-none');
+         const reader = new FileReader();
+         reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            imagePreview.style.display = 'block';
+         };
+         reader.readAsDataURL(file);
+      });
+   }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="scroll-top" id="scrollTop">
+    <svg class="progress-circle svg-content" height="100%" viewBox="-1 -1 102 102" width="100%">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" fill="none" stroke="#fd5523" stroke-width="2"></path>
+    </svg>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scrollBtn = document.getElementById('scrollTop');
+        if (!scrollBtn) return;
+        const progressPath = document.querySelector('.progress-circle path');
+        if (progressPath) {
+            const pathLength = progressPath.getTotalLength();
+            progressPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
+            progressPath.style.transition = 'stroke-dashoffset 10ms linear';
+            const updateProgress = () => {
+                const scroll = window.pageYOffset;
+                const height = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = pathLength - (scroll * pathLength / (height || 1));
+                progressPath.style.strokeDashoffset = progress;
+                if (scroll > 300) scrollBtn.classList.add('active', 'visible');
+                else scrollBtn.classList.remove('active', 'visible');
+            };
+            window.addEventListener('scroll', updateProgress);
+            updateProgress();
+        }
+        scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    });
+</script>

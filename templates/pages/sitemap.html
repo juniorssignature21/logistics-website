@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Site Map | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Site Map</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Site Map</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <section class="sec-padding bg-shade">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Site Navigation</span>
+            <h2 class="sec-title">Every Page, One Click Away</h2>
+         </div>
+         <div class="row gy-4">
+            <div class="col-lg-4 col-md-6">
+               <div class="policy-content h-100">
+                  <h4><i class="bi bi-house-door-fill me-2"></i>Company</h4>
+                  <ul class="list-unstyled">
+                     <li class="mb-2"><a href="{% url 'home' %}"><i class="bi bi-chevron-right me-1"></i> Home</a></li>
+                     <li class="mb-2"><a href="{% url 'about' %}"><i class="bi bi-chevron-right me-1"></i> About Us</a></li>
+                     <li class="mb-2"><a href="{% url 'careers:page' %}"><i class="bi bi-chevron-right me-1"></i> Careers</a></li>
+                     <li class="mb-2"><a href="{% url 'contact:page' %}"><i class="bi bi-chevron-right me-1"></i> Contact Us</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+               <div class="policy-content h-100">
+                  <h4><i class="bi bi-truck me-2"></i>Services</h4>
+                  <ul class="list-unstyled">
+                     <li class="mb-2"><a href="{% url 'services' %}"><i class="bi bi-chevron-right me-1"></i> All Services</a></li>
+                     <li class="mb-2"><a href="{% url 'quotes:page' %}"><i class="bi bi-chevron-right me-1"></i> Request a Quote</a></li>
+                     <li class="mb-2"><a href="{% url 'tracking:page' %}"><i class="bi bi-chevron-right me-1"></i> Track a Shipment</a></li>
+                     <li class="mb-2"><a href="{% url 'faq' %}"><i class="bi bi-chevron-right me-1"></i> FAQ / Help Center</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+               <div class="policy-content h-100">
+                  <h4><i class="bi bi-file-text-fill me-2"></i>Policies &amp; Legal</h4>
+                  <ul class="list-unstyled">
+                     <li class="mb-2"><a href="{% url 'privacy_policy' %}"><i class="bi bi-chevron-right me-1"></i> Privacy &amp; Company Policies</a></li>
+                     <li class="mb-2"><a href="{% url 'terms' %}"><i class="bi bi-chevron-right me-1"></i> Terms &amp; Conditions</a></li>
+                     <li class="mb-2"><a href="{% url 'sitemap_page' %}"><i class="bi bi-chevron-right me-1"></i> Site Map</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}

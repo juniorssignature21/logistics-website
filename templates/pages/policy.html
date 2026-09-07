@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Policies | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Our Policies</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Policies</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Policy Content -->
+   <section class="sec-padding bg-shade">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Legal Framework</span>
+            <h2 class="sec-title">Company Policies &amp; Legal Guidelines</h2>
+         </div>
+
+         <div class="row">
+            <div class="col-lg-3 mb-4">
+               <div class="policy-sidebar">
+                  <h5 class="fw-bold mb-3" style="color: #1a1a1a; font-size: 18px;">Quick Navigation</h5>
+                  <nav class="nav flex-column">
+                     <a class="nav-link active" href="#shipping"><i class="bi bi-shield-check me-2"></i>Shipping &amp; Liability</a>
+                     <a class="nav-link" href="#prohibited"><i class="bi bi-x-octagon me-2"></i>Prohibited Items</a>
+                     <a class="nav-link" href="#privacy"><i class="bi bi-lock me-2"></i>Privacy Policy</a>
+                     <a class="nav-link" href="#terms"><i class="bi bi-file-text me-2"></i>Terms &amp; Conditions</a>
+                     <a class="nav-link" href="#updates"><i class="bi bi-arrow-clockwise me-2"></i>Policy Updates</a>
+                  </nav>
+               </div>
+            </div>
+
+            <div class="col-lg-9">
+               <div id="shipping" class="policy-content">
+                  <h4><i class="bi bi-shield-check me-2"></i>Shipping, Insurance, and Liability</h4>
+                  <p class="lead">Effective Date: 1 Jan 2024</p>
+
+                  <div class="policy-heading">A. General Carrier Liability</div>
+                  <p>Our standard liability for loss or damage to goods is limited to $50 USD or the cost of repair/replacement, whichever is less, unless additional insurance is purchased. This limit applies to all shipments where declared value protection is not selected.</p>
+
+                  <div class="policy-heading">B. Declared Value and Insurance</div>
+                  <p>Customers have the option to declare a higher value for their shipments. This declared value is not insurance, but it increases the maximum liability limit. Full insurance coverage is available at a rate of 1% of the declared value (minimum premium applies) and must be requested prior to pickup.</p>
+
+                  <div class="policy-heading">C. Claims Process</div>
+                  <p>All claims for loss or damage must be submitted in writing within 14 calendar days of the delivery date (or expected delivery date). Failure to meet this deadline will result in the denial of the claim. Required documentation includes the original invoice, packing list, and photos of the damage.</p>
+               </div>
+
+               <div id="prohibited" class="policy-content">
+                  <h4><i class="bi bi-x-octagon me-2"></i>Prohibited &amp; Restricted Items List</h4>
+                  <p style="margin-bottom: 20px;">For safety, security, and compliance with international law, the following items are strictly prohibited for carriage:</p>
+                  <ul class="prohibited-list">
+                     <li><i class="bi bi-x-circle-fill"></i> Explosives, firearms, and ammunition.</li>
+                     <li><i class="bi bi-x-circle-fill"></i> Illegal narcotics and controlled substances.</li>
+                     <li><i class="bi bi-x-circle-fill"></i> Perishable items requiring temperature control outside of pre-approved Cold Chain agreements.</li>
+                     <li><i class="bi bi-x-circle-fill"></i> Cash, negotiable instruments, and un-mounted precious stones/metals.</li>
+                     <li><i class="bi bi-x-circle-fill"></i> Live animals (unless special permits and service agreements are in place).</li>
+                  </ul>
+                  <p class="text-muted small mt-3">
+                     <i class="bi bi-info-circle me-1"></i> <strong>Note:</strong> It is the shipper's responsibility to ensure compliance with all origin, transit, and destination country laws. Failure to disclose prohibited goods may result in shipment seizure and fines.
+                  </p>
+               </div>
+
+               <div id="privacy" class="policy-content">
+                  <h4><i class="bi bi-lock me-2"></i>Privacy Policy (Data Handling)</h4>
+                  <p class="lead">Your privacy is paramount. We comply with GDPR and similar global regulations.</p>
+
+                  <div class="policy-heading">A. Data Collection</div>
+                  <p>We collect personal data (Name, Address, Email, Phone) necessary to execute shipping services and customs clearance. We also collect anonymized tracking data to improve site performance.</p>
+
+                  <div class="policy-heading">B. Data Usage</div>
+                  <p>Personal data is used strictly for service fulfillment, billing, tracking updates, and regulatory compliance. We do not sell or rent your data to third parties for marketing purposes.</p>
+
+                  <div class="policy-heading">C. Data Sharing</div>
+                  <p>Data is shared only with necessary third parties, including customs authorities, destination delivery agents, and affiliated carriers, to complete the delivery cycle.</p>
+               </div>
+
+               <div id="terms" class="policy-content">
+                  <h4><i class="bi bi-file-text me-2"></i>General Terms &amp; Conditions</h4>
+                  <p class="lead">The fundamental agreement between our company and the customer.</p>
+
+                  <div class="policy-heading">A. Service Acceptance</div>
+                  <p>By booking a shipment, the Shipper accepts these terms and conditions on behalf of themselves and any interested party in the shipment.</p>
+
+                  <div class="policy-heading">B. Right to Inspect</div>
+                  <p>We reserve the right to open and inspect any shipment without notice for safety, security, customs, or other regulatory reasons.</p>
+
+                  <div class="policy-heading">C. Governing Law</div>
+                  <p>These terms are governed by the laws of the applicable jurisdiction, and the customer submits to the non-exclusive jurisdiction of the courts located therein. See our full <a href="{% url 'terms' %}">Terms &amp; Conditions</a> for details.</p>
+               </div>
+
+               <div id="updates" class="policy-content">
+                  <h4><i class="bi bi-arrow-clockwise me-2"></i>Policy Updates</h4>
+                  <p class="lead">Last Updated: 1 January 2024</p>
+                  <p>We may update these policies from time to time. We encourage users to review this page periodically for any changes. Continued use of our services after any policy modification constitutes acceptance of those changes.</p>
+                  <div class="alert alert-info mt-4" style="border-radius: 8px; border: none; background: #e8f4fd;">
+                     <i class="bi bi-bell-fill me-2" style="color: #0d6efd;"></i>
+                     <strong>Stay Informed:</strong> For significant policy changes, we will notify registered customers via email at least 30 days before the changes take effect.
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}

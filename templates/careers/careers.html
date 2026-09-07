@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Careers | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Careers</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Careers</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Why Join Us -->
+   <section class="sec-padding bg-shade">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Join Our Team</span>
+            <h2 class="sec-title">Why Choose a Career With {{ site_settings.site_name }}?</h2>
+         </div>
+         <div class="row g-4">
+            <div class="col-md-4">
+               <div class="value-card">
+                  <div class="icon-box"><i class="bi bi-globe"></i></div>
+                  <h4>Global Impact</h4>
+                  <p>Be the link that connects businesses and families worldwide, managing critical supply chains across 220+ countries.</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="value-card">
+                  <div class="icon-box"><i class="bi bi-shield-check"></i></div>
+                  <h4>Competitive Benefits</h4>
+                  <p>Comprehensive health plans, generous paid time off, retirement matching, and competitive salary packages.</p>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="value-card">
+                  <div class="icon-box"><i class="bi bi-graph-up-arrow"></i></div>
+                  <h4>Growth &amp; Training</h4>
+                  <p>Ongoing professional development, mentorship programs, and clear advancement paths in a fast-growing industry.</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Job Openings -->
+   <section class="sec-padding">
+      <div class="container">
+         <div class="sec-intro">
+            <span class="sub-title">Open Positions</span>
+            <h2 class="sec-title">Current Opportunities</h2>
+         </div>
+
+         <div class="row g-4">
+            {% for job in jobs %}
+            <div class="col-md-6 col-lg-4">
+               <div class="job-card">
+                  <div class="card-header-job">
+                     <h5><i class="bi bi-briefcase me-2 text-muted"></i>{{ job.title }}</h5>
+                  </div>
+                  <div class="card-body">
+                     <div class="job-meta">
+                        <div class="mb-1"><i class="bi bi-geo-alt"></i> {{ job.location }}</div>
+                        <div><i class="bi bi-building"></i> {{ job.department }}</div>
+                     </div>
+                     <p class="job-desc">{{ job.description }}</p>
+                     <button type="button" class="btn-apply apply-job-btn" data-bs-toggle="modal" data-bs-target="#applicationModal" data-job-title="{{ job.title }}">
+                        Apply Now <i class="bi bi-chevron-right"></i>
+                     </button>
+                  </div>
+               </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">No open positions right now — check back soon, or send us a general application below.</div>
+            {% endfor %}
+         </div>
+
+         <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+               <div class="general-app-box">
+                  <i class="bi bi-send-fill" style="font-size: 40px; color: #fd5523; margin-bottom: 15px; display: block;"></i>
+                  <h4 class="fw-bold mb-3">Don't See Your Perfect Fit?</h4>
+                  <p>We're always looking for talented individuals. Send us your resume for future opportunities.</p>
+                  <button type="button" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applicationModal" data-job-title="General Application">
+                     Submit General Application <i class="bi bi-chevron-right"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- CTA -->
+   <section class="cta-section sec-padding">
+      <div class="container">
+         <div class="cta-content text-center text-white">
+            <h2 class="display-5 fw-bold mb-3">Ready to Start Your Career?</h2>
+            <p class="lead mb-4">Join a team that's redefining global logistics.</p>
+            <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#applicationModal" data-job-title="General Application">
+               Apply Today <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+         </div>
+      </div>
+   </section>
+
+   <!-- Application Modal -->
+   <div class="modal fade" id="applicationModal" tabindex="-1" aria-labelledby="applicationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="applicationModalLabel"><i class="bi bi-person-rolodex me-2"></i> Job Application Form</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <p class="mb-3">Applying for: <strong id="job-title-display" style="color: #fd5523;">General Application</strong></p>
+               <hr>
+               <form id="applicationForm" action="{% url 'careers:apply' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input type="hidden" name="job_title" id="job-title-input" value="General Application">
+
+                  <div class="row mb-3">
+                     <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="fullName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="fullName" name="full_name" required placeholder="Enter your full name">
+                     </div>
+                     <div class="col-md-6">
+                        <label for="appEmail" class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="appEmail" name="email" required placeholder="you@example.com">
+                     </div>
+                  </div>
+
+                  <div class="row mb-3">
+                     <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="appPhone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="appPhone" name="phone" placeholder="e.g., +1 234 567 890">
+                     </div>
+                     <div class="col-md-6">
+                        <label for="location" class="form-label">Current Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="City, State or Country">
+                     </div>
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="resume" class="form-label">Upload Resume/CV (PDF, DOCX) <span class="text-danger">*</span></label>
+                     <input class="form-control" type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                     <div class="form-text">Max file size: 5MB.</div>
+                  </div>
+
+                  <div class="mb-3">
+                     <label for="appMessage" class="form-label">Cover Letter / Brief Message (Optional)</label>
+                     <textarea class="form-control" id="appMessage" name="message" rows="3" placeholder="Tell us why you're a great fit..."></textarea>
+                  </div>
+
+                  <div class="form-check mb-4">
+                     <input class="form-check-input" type="checkbox" value="agreed" name="agreed_privacy" id="privacyCheck" required>
+                     <label class="form-check-label small" for="privacyCheck">
+                        I confirm that I have read and agree to the <a href="{% url 'privacy_policy' %}" target="_blank" style="color: #fd5523;">Privacy Policy</a> regarding the submission of my personal data.
+                     </label>
+                  </div>
+
+                  <div id="application-error" class="alert alert-danger d-none"></div>
+
+                  <div class="d-flex gap-2">
+                     <button type="submit" id="application-submit-btn" name="submit_application" class="btn-submit">
+                        <i class="bi bi-box-arrow-in-right me-2"></i> Submit Application
+                     </button>
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/sweetalert2/sweetalert2.min.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'vendor/sweetalert2/sweetalert2.all.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+   document.querySelectorAll('.apply-job-btn, [data-bs-target="#applicationModal"]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+         const title = btn.getAttribute('data-job-title') || 'General Application';
+         document.getElementById('job-title-display').textContent = title;
+         document.getElementById('job-title-input').value = title;
+      });
+   });
+
+   const form = document.getElementById('applicationForm');
+   const btn = document.getElementById('application-submit-btn');
+   const errorBox = document.getElementById('application-error');
+   if (!form) return;
+   form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const original = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting…';
+      errorBox.classList.add('d-none');
+
+      fetch(form.action, {
+         method: 'POST',
+         headers: { 'X-Requested-With': 'XMLHttpRequest' },
+         body: new FormData(form),
+      })
+         .then(function (res) { return res.json(); })
+         .then(function (data) {
+            btn.disabled = false;
+            btn.innerHTML = original;
+            if (data.success) {
+               form.reset();
+               const modalEl = document.getElementById('applicationModal');
+               const modal = bootstrap.Modal.getInstance(modalEl);
+               if (modal) modal.hide();
+               Swal.fire({
+                  icon: 'success', title: 'Application Submitted!', text: data.message,
+                  confirmButtonColor: '#fd5523', timer: 5000, timerProgressBar: true,
+               });
+            } else {
+               errorBox.textContent = data.message;
+               errorBox.classList.remove('d-none');
+            }
+         })
+         .catch(function () {
+            btn.disabled = false;
+            btn.innerHTML = original;
+            errorBox.textContent = 'Something went wrong. Please try again.';
+            errorBox.classList.remove('d-none');
+         });
+   });
+});
+</script>
+{% endblock %}

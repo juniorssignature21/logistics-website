@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Services | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed=".4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-info">Services</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Services</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Services Grid -->
+   <section class="services-sec bg-shade sec-padding">
+      <div class="container">
+         <div class="sec-intro mx-auto text-center mb-5">
+            <span class="sub-title2 fadeInUp">What We Offer</span>
+            <h2 class="sec-title">Our Comprehensive Logistics Solutions</h2>
+         </div>
+         <div class="row gy-4">
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6">
+               <div class="service-card2 round bg-info fadeInUp" data-delay="0.{{ forloop.counter0|add:2 }}">
+                  <div class="serv-thumb" style="background-image: url('{% static service.thumbnail_image|default:'images/serv-s1.png' %}');">
+                     <span class="icon round-2"><i class="{{ service.icon }}"></i></span>
+                  </div>
+                  <h3 class="display-4">{{ service.title }}</h3>
+                  <ul class="list-unstyled text-muted mb-3 small">
+                     {% for icon, text in service.features %}
+                     <li><i class="{{ icon }} text-crimson me-2"></i> {{ text }}</li>
+                     {% endfor %}
+                  </ul>
+                  <div class="service-footer border-top pt-3 mt-auto">
+                     <a class="custom-btn" href="{% url service.cta_url_name %}"><span class="icon rounded-3"><i class="bi bi-arrow-right"></i></span>{{ service.cta_label }}</a>
+                  </div>
+               </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">Services are being updated — please check back shortly.</div>
+            {% endfor %}
+         </div>
+      </div>
+   </section>
+
+   <!-- Why Us / Quote Form -->
+   <section class="why-us3 sec-padding jarallax" data-jarallax data-speed=".4">
+      <img src="{% static 'images/whu-us-bg.jpg' %}" class="jarallax-img" alt="">
+      <img src="{% static 'images/slide-anim.png' %}" class="abs-img bottom-0" alt="">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-6">
+               <div class="why-txt">
+                  <div class="sec-intro">
+                     <span class="sub-title fadeInUp">Why We're Special</span>
+                     <h2 class="sec-title text-white">We Want to Make a Good Impact on Your Business</h2>
+                     <p>At {{ site_settings.site_name }}, we are committed to revolutionizing the transportation industry through innovative solutions and unparalleled service.</p>
+                  </div>
+                  <div class="success-stat">
+                     <div class="progress"><div class="meta">Shipping</div><div class="progress-bar" data-progress="90%" style="width: 90%;"><span>90%</span></div></div>
+                     <div class="progress"><div class="meta">Successful Delivery</div><div class="progress-bar" data-progress="95%" style="width: 95%;"><span>95%</span></div></div>
+                     <div class="progress"><div class="meta">Management</div><div class="progress-bar" data-progress="91%" style="width: 91%;"><span>91%</span></div></div>
+                  </div>
+                  <div class="quick-call d-flex align-items-center">
+                     <span class="bg-info icon-lg rounded-circle text-primary"><i class="fa-solid fa-phone-volume"></i></span>
+                     <div class="conn-txt ms-3">
+                        <p class="m-0">Call Us Any Time:</p>
+                        <a class="h6 text-info" href="tel:{{ site_settings.phone }}">{{ site_settings.phone }}</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6">
+               <div class="quote-form rounded-4 fadeInUp">
+                  <h3>Request Quote Form</h3>
+                  <form action="{% url 'quotes:quick_submit' %}" method="post">
+                     {% csrf_token %}
+                     <div class="row">
+                        <div class="col-lg-6 form-group"><label for="sv-name">Full Name</label><input id="sv-name" name="name" type="text" placeholder="Full Name" required></div>
+                        <div class="col-lg-6 form-group"><label for="sv-email">Email Address</label><input id="sv-email" name="email" type="email" placeholder="Email" required></div>
+                        <div class="col-lg-6 form-group"><label for="sv-phone">Phone</label><input id="sv-phone" name="phone" type="text" placeholder="+554 6487 244" required></div>
+                        <div class="col-lg-6 form-group">
+                           <label for="sv-city">Delivery City</label>
+                           <select class="tv-select" name="city_deliver" id="sv-city" required>
+                              {% for value, label in quick_quote_form.fields.city_deliver.choices %}
+                              <option value="{{ value }}">{{ label }}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="sv-freight">Freight Type</label>
+                           <select class="tv-select" name="freight_type" id="sv-freight">
+                              {% for value, label in quick_quote_form.fields.freight_type.choices %}
+                              <option value="{{ value }}">{{ label }}</option>
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                           <label for="sv-weight">Weight</label>
+                           <input id="sv-weight" name="weight" type="text" placeholder="Weight (kg)">
+                        </div>
+                        <div class="col-12">
+                           <button class="btn btn-primary">Submit Request <i class="fa fa-arrow-right"></i><span></span></button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- FAQ + Appointment -->
+   <section class="faq-sec sec-padding position-relative">
+      <div class="container">
+         <div class="sec-intro mx-auto text-center">
+            <span class="sub-title2 fadeInUp">Quick Answers</span>
+            <h2 class="sec-title">What Details Are Required for a Quote?</h2>
+         </div>
+         <div class="row gy-4">
+            <div class="col-lg-7">
+               <div class="faq-accordion rounded-4" id="sv-accordion">
+                  {% for question, answer in service_faqs %}
+                  <div class="accordion-item {% if forloop.first %}active{% endif %}">
+                     <h2 class="accordion-header" id="svHeading{{ forloop.counter }}">
+                        <button class="accordion-button display-5 {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#svCollapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                           {{ question }}
+                        </button>
+                     </h2>
+                     <div id="svCollapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#sv-accordion">
+                        <div class="accordion-body"><p>{{ answer }}</p></div>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            <div class="col-lg-5">
+               <div class="contact-form rounded-4 position-relative">
+                  <h3 class="display-4">Make An Appointment</h3>
+                  <form action="{% url 'contact:submit' %}" method="post">
+                     {% csrf_token %}
+                     <input type="hidden" name="subject" value="Appointment Request">
+                     <input type="hidden" name="urgency" value="Standard">
+                     <div class="form-group">
+                        <input type="text" name="name" placeholder="Your name" required>
+                        <i class="fa-regular fa-user"></i>
+                     </div>
+                     <div class="form-group">
+                        <input type="email" name="email" placeholder="Your email" required>
+                        <i class="fa-regular fa-envelope"></i>
+                     </div>
+                     <div class="form-group">
+                        <input type="text" name="phone" placeholder="Phone Number" required>
+                        <i class="fa-solid fa-headphones"></i>
+                     </div>
+                     <div class="form-group">
+                        <select name="inquiry_type" required>
+                           <option value="International Priority Express">Freight Sky (Air)</option>
+                           <option value="Air & Sea Freight">Freight Ship (Sea)</option>
+                           <option value="Domestic Shipping">Freight Road</option>
+                           <option value="Heavy Transport">Freight Rail</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <input type="text" name="message" placeholder="Total Unit / Notes">
+                        <i class="fa-regular fa-clipboard"></i>
+                     </div>
+                     <button class="btn btn-primary btn-lg w-100 mt-2">Book an Appointment <i class="fa fa-arrow-right"></i><span></span></button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}

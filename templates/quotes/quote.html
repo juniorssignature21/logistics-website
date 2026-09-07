@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Request a Quote | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed="0.4">
+      <img src="{% static 'images/promo.jpg' %}" alt="" class="jarallax-img">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap">
+                  <h1 class="display-2 text-white">Request Quote</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Request Quote</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Quote Features -->
+   <div class="quote-features sec-padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="quote-wrap d-md-flex justify-content-between gap-4">
+                  <div class="qf-card rounded-3 text-center p-4 bg-white shadow-sm">
+                     <span class="icon mx-auto"><i class="bi bi-cash-stack"></i></span>
+                     <h5>Transparent Pricing</h5>
+                  </div>
+                  <div class="qf-card rounded-3 text-center p-4 bg-white shadow-sm">
+                     <span class="icon mx-auto"><i class="bi bi-geo-alt-fill"></i></span>
+                     <h5>Real Time Tracking</h5>
+                  </div>
+                  <div class="qf-card rounded-3 text-center p-4 bg-white shadow-sm">
+                     <span class="icon mx-auto"><i class="bi bi-headset"></i></span>
+                     <h5>24/7 Online Support</h5>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="row quote-form-wrap g-0 round mt-5">
+            <div class="col-lg-4">
+               <div class="quote-thumb h-100">
+                  <img src="{% static 'images/quote-thumb.jpg' %}" alt="Shipping Quote" class="img-fluid">
+               </div>
+            </div>
+            <div class="col-lg-8 pt-5 pt-lg-0 bg-white">
+               <form id="quote-form" method="post" action="{% url 'quotes:calculate' %}" class="quote-request-form p-4 p-lg-5">
+                  {% csrf_token %}
+                  <div class="row personal-info gy-3">
+                     <h5>Personal Info</h5>
+                     <div class="col-md-4 qr-group">
+                        <i class="bi bi-person"></i>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                     </div>
+                     <div class="col-md-4 qr-group">
+                        <i class="bi bi-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                     </div>
+                     <div class="col-md-4 qr-group">
+                        <i class="bi bi-telephone"></i>
+                        <input type="text" id="phone" name="phone" placeholder="Your Phone" required>
+                     </div>
+                  </div>
+
+                  <div class="row mt-4 shipment-info">
+                     <h5>Shipment Info</h5>
+                     <div class="d-sm-flex flex-wrap gap-3">
+                        <div class="group-field">
+                           <select name="freight_type" id="f_type" class="tv-select" required>
+                              <option value="">Freight Type</option>
+                              {% for value, label in form.fields.freight_type.choices %}
+                              {% if value %}<option value="{{ value }}">{{ label }}</option>{% endif %}
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="group-field">
+                           <input type="text" id="departure" name="departure" placeholder="City Departure" required>
+                        </div>
+                        <div class="group-field">
+                           <input type="text" id="city_deliver" name="city_deliver" placeholder="Delivery City" required>
+                        </div>
+                        <div class="group-field">
+                           <select name="incoterms" id="incoterms" class="tv-select">
+                              <option value="">Incoterms</option>
+                              {% for value, label in form.fields.incoterms.choices %}
+                              {% if value %}<option value="{{ value }}">{{ label }}</option>{% endif %}
+                              {% endfor %}
+                           </select>
+                        </div>
+                        <div class="group-field">
+                           <input type="number" step="0.1" min="0.1" id="weight" name="weight" placeholder="Weight (kg)" required>
+                        </div>
+                        <div class="group-field">
+                           <input type="text" id="dimensions" name="dimensions" placeholder="L x W x H (cm)">
+                        </div>
+                        <div class="group-field">
+                           <input type="text" id="ship_date" name="ship_date" placeholder="Date" data-date-format="mm/dd/yy">
+                        </div>
+                     </div>
+
+                     <div class="col-lg-5 mt-5">
+                        <button type="submit" id="quote-submit-btn" class="btn btn-primary w-100">
+                           Calculate Quote <i class="bi bi-calculator"></i>
+                        </button>
+                     </div>
+                  </div>
+
+                  <div id="quote-result" style="display:none;" class="mt-4 rounded-3 overflow-hidden border">
+                     <div id="quote-result-header" style="background:linear-gradient(135deg,#fd5523,#e04a1d);padding:20px 24px;color:#fff;">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                           <div>
+                              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.8;">Estimated Quote</div>
+                              <div id="qr-route" style="font-size:1rem;font-weight:700;margin-top:2px;"></div>
+                              <div id="qr-freight" style="font-size:.85rem;opacity:.85;"></div>
+                           </div>
+                           <div style="text-align:right;">
+                              <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1px;opacity:.7;">Price Range (USD)</div>
+                              <div id="qr-price" style="font-size:2rem;font-weight:800;line-height:1.1;"></div>
+                              <div id="qr-transit" style="font-size:.8rem;opacity:.8;margin-top:2px;"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div style="background:#fff;padding:20px 24px;">
+                        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:12px;">Cost Breakdown</div>
+                        <table id="qr-breakdown" style="width:100%;font-size:.875rem;border-collapse:collapse;"></table>
+                        <div id="qr-note" style="margin-top:14px;font-size:.8rem;color:#888;background:#f8f9fa;border-radius:8px;padding:10px 14px;"></div>
+                     </div>
+                  </div>
+
+                  <div id="quote-error" style="display:none;" class="alert alert-danger mt-3"></div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+   $(document).ready(function () {
+      $('select.tv-select').niceSelect();
+   });
+   $('#ship_date').datepicker({ format: 'mm/dd/yyyy', autoclose: true, todayHighlight: true });
+
+   $('#quote-form').on('submit', function (e) {
+      e.preventDefault();
+      const btn = $('#quote-submit-btn');
+      btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Calculating…');
+      $('#quote-result').hide();
+      $('#quote-error').hide();
+
+      $.ajax({
+         url: $(this).attr('action'),
+         method: 'POST',
+         data: $(this).serialize(),
+         dataType: 'json',
+         success: function (res) {
+            btn.prop('disabled', false).html('Calculate Quote <i class="bi bi-calculator"></i>');
+            if (!res.success) {
+               $('#quote-error').text(res.message).show();
+               return;
+            }
+            $('#qr-route').text(res.route);
+            $('#qr-freight').text(res.freight_type);
+            $('#qr-price').text('$' + res.price_low + ' – $' + res.price_high);
+            $('#qr-transit').html('<i class="bi bi-clock me-1"></i>' + res.transit);
+
+            let rows = '';
+            res.breakdown.forEach(function (item, i) {
+               const bg = i % 2 === 0 ? '#fafafa' : '#fff';
+               rows += '<tr style="background:' + bg + ';">'
+                     + '<td style="padding:8px 10px;color:#555;">' + item.label + '</td>'
+                     + '<td style="padding:8px 10px;font-weight:700;text-align:right;color:#1a1a1a;">' + item.value + '</td>'
+                     + '</tr>';
+            });
+            rows += '<tr style="border-top:2px solid #fd5523;">'
+                  + '<td style="padding:10px 10px;font-weight:700;color:#fd5523;">Estimated Total</td>'
+                  + '<td style="padding:10px 10px;font-weight:800;text-align:right;color:#fd5523;font-size:1.05rem;">$' + res.price_low + ' – $' + res.price_high + '</td>'
+                  + '</tr>';
+            $('#qr-breakdown').html(rows);
+            $('#qr-note').html('<i class="bi bi-info-circle me-1"></i>' + res.note);
+
+            $('#quote-result').hide().show().css('opacity', 0).animate({ opacity: 1 }, 400);
+            $('html, body').animate({ scrollTop: $('#quote-result').offset().top - 80 }, 600);
+         },
+         error: function (xhr) {
+            btn.prop('disabled', false).html('Calculate Quote <i class="bi bi-calculator"></i>');
+            let msg = 'Something went wrong. Please try again.';
+            if (xhr.responseJSON && xhr.responseJSON.message) msg = xhr.responseJSON.message;
+            $('#quote-error').text(msg).show();
+         }
+      });
+   });
+</script>
+{% endblock %}

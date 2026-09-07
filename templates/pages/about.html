@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About Us | {{ site_settings.site_name }}{% endblock %}
+{% block content %}
+
+   <!-- Promo Section -->
+   <section class="promo-sec bg-cover jarallax" data-jarallax data-speed=".4" style="background-image: url('{% static 'images/promo.jpg' %}');">
+      <div class="parallax-overly"></div>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="promo-wrap text-center text-white">
+                  <h1 class="display-2 text-white">About Us</h1>
+                  <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                     </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- About Section -->
+   <section class="about-details sec-padding">
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-lg-6">
+               <div class="about-thumb me-lg-4 position-relative">
+                  <img class="img-fluid rounded-4" src="{% static 'images/about-d.jpg' %}" alt="About Us">
+                  <div class="position-absolute bottom-0 start-0 m-3 bg-white p-3 rounded-3 shadow">
+                     <h2 class="display-5 fw-bold text-crimson mb-0">25+</h2>
+                     <p class="mb-0 small">Years of Excellence</p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+               <span class="sub-title fadeInUp"><i class="bi bi-award-fill me-2"></i> WHO WE ARE</span>
+               <h2 class="sec-title">Digital &amp; Trusted Transport Logistic Company</h2>
+               <p class="text-muted mb-4">
+                  Our global logistics expertise, advanced supply chain technology &amp; customized logistics solutions will help you analyze, develop, and implement successful strategies for your business growth.
+               </p>
+               <div class="row gy-4 abs-info-wrap">
+                  <div class="col-lg-6 col-sm-6">
+                     <div class="abs-info">
+                        <h3 class="display-6">Years Of Experience</h3>
+                        <div class="d-flex align-items-center justify-content-between border-bottom pb-2">
+                           <i class="bi bi-clock-history fs-2 text-crimson"></i>
+                           <span class="display-4 fw-bold text-crimson">25</span>
+                        </div>
+                        <p class="mb-0 mt-2">Over two decades of industry leadership</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                     <div class="abs-info">
+                        <h3 class="display-6">Global Locations</h3>
+                        <div class="d-flex align-items-center justify-content-between border-bottom pb-2">
+                           <i class="bi bi-globe fs-2 text-crimson"></i>
+                           <span class="display-4 fw-bold text-crimson">88</span>
+                        </div>
+                        <p class="mb-0 mt-2">Operating across 88 countries worldwide</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                     <div class="abs-info">
+                        <h3 class="display-6">Total Employees</h3>
+                        <div class="d-flex align-items-center justify-content-between border-bottom pb-2">
+                           <i class="bi bi-people fs-2 text-crimson"></i>
+                           <span class="display-4 fw-bold text-crimson">2.5K</span>
+                        </div>
+                        <p class="mb-0 mt-2">Dedicated professionals worldwide</p>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-sm-6">
+                     <div class="abs-info">
+                        <h3 class="display-6">Annual Revenue</h3>
+                        <div class="d-flex align-items-center justify-content-between border-bottom pb-2">
+                           <i class="bi bi-graph-up-arrow fs-2 text-crimson"></i>
+                           <span class="display-4 fw-bold text-crimson">$750M</span>
+                        </div>
+                        <p class="mb-0 mt-2">Consistent year-over-year growth</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Process Section -->
+   <section class="process-sec bg-shade sec-padding position-relative overflow-hidden">
+      <div class="container">
+         <div class="sec-intro mx-auto text-center">
+            <span class="sub-title fadeInUp"><i class="bi bi-box-seam me-2"></i>WORKING PROCESS</span>
+            <h2 class="sec-title">Logistics Solutions to Help Businesses</h2>
+         </div>
+         <div class="process-wrapper d-flex justify-content-between flex-wrap mt-5">
+            <div class="process-card text-center fadeInUp" data-delay=".2">
+               <span class="count mx-auto rounded-circle">01</span>
+               <div class="process-thumb d-flex align-items-center justify-content-center">
+                  <img src="{% static 'images/st1.png' %}" alt="Select Services">
+               </div>
+               <h3 class="display-4">Select Services</h3>
+               <p>Choose from our wide range of logistics and transportation solutions tailored to your needs.</p>
+            </div>
+            <div class="process-card text-center fadeInUp" data-delay=".4">
+               <span class="count mx-auto rounded-circle">02</span>
+               <div class="process-thumb d-flex align-items-center justify-content-center">
+                  <img src="{% static 'images/st2.png' %}" alt="Parcel Information">
+               </div>
+               <h3 class="display-4">Parcel Information</h3>
+               <p>Provide shipment details and we handle the rest with precision and care.</p>
+            </div>
+            <div class="process-card text-center fadeInUp" data-delay=".6">
+               <span class="count mx-auto rounded-circle">03</span>
+               <div class="process-thumb d-flex align-items-center justify-content-center">
+                  <img src="{% static 'images/st3.png' %}" alt="Transportation">
+               </div>
+               <h3 class="display-4">Transportation</h3>
+               <p>Real-time tracking and safe delivery to your destination anywhere in the world.</p>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Mission / Vision / History -->
+   <section class="about-sec3 sec-padding">
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-xl-5 col-lg-7 mx-lg-auto">
+               <div class="about-media3 position-relative">
+                  <div class="feat-img position-relative rounded-4 overflow-hidden">
+                     <img src="{% static 'images/about-ft.jpg' %}" class="img-fluid" alt="About">
+                     <div class="experien-stat">
+                        <p class="m-0 text-white"><span class="fw-bold">25</span>+ Years Experience</p>
+                     </div>
+                  </div>
+                  <div class="d-flex ab-sm-ft align-items-center gap-4 mt-3">
+                     <img class="rounded-4 img-fluid" src="{% static 'images/about-ft2.png' %}" alt="about" style="width: 45%;">
+                     <img class="img-fluid rounded-4" src="{% static 'images/about-ft3.png' %}" alt="about" style="width: 45%;">
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-7 mt-5 mt-xl-0">
+               <div class="about-content3 ps-xl-5">
+                  <span class="sub-title fadeInUp"><i class="bi bi-building me-2"></i>About Our Company</span>
+                  <h2 class="sec-title">Our services increase the productivity of your work.</h2>
+                  <p class="text-muted">Our global logistics expertise, advanced supply chain technology &amp; customized logistics solutions will help you analyze, develop, and implement successful strategies.</p>
+
+                  <ul class="nav nav-tabs" id="aboutTab" role="tablist">
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="mission-tab" data-bs-toggle="tab" data-bs-target="#mission" type="button" role="tab">Our Mission</button>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab">Our Vision</button>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">Our History</button>
+                     </li>
+                  </ul>
+                  <div class="tab-content" id="aboutTabContent">
+                     <div class="tab-pane fade show active" id="mission" role="tabpanel">
+                        <div class="d-sm-flex gap-4 mb-3">
+                           <div class="tab-img flex-shrink-0">
+                              <img src="{% static 'images/ab-t1.png' %}" alt="Mission" class="rounded-4" style="width: 200px;">
+                           </div>
+                           <div class="tab-txt">
+                              <p>To be the most reliable and technologically advanced courier and logistics partner globally, ensuring every package reaches its destination on time, intact, and secure.</p>
+                              <p>We foster seamless international trade and business growth for our clients through innovation and integrity.</p>
+                           </div>
+                        </div>
+                        <h6 class="fw-bold text-crimson"><i class="bi bi-check-circle-fill me-2"></i>Integrity, Security, Innovation, Global Connectivity</h6>
+                     </div>
+                     <div class="tab-pane fade" id="vision" role="tabpanel">
+                        <div class="d-sm-flex gap-4 mb-3">
+                           <div class="tab-img flex-shrink-0">
+                              <img src="{% static 'images/ab-t1.png' %}" alt="Vision" class="rounded-4" style="width: 200px;">
+                           </div>
+                           <div class="tab-txt">
+                              <p>To become the world's most trusted logistics network, connecting businesses and communities across every continent with unparalleled speed and reliability.</p>
+                              <p>We envision a future where logistics is seamless, sustainable, and accessible to all.</p>
+                           </div>
+                        </div>
+                        <h6 class="fw-bold text-crimson"><i class="bi bi-check-circle-fill me-2"></i>Sustainability, Digital Integration, Global Reach</h6>
+                     </div>
+                     <div class="tab-pane fade" id="history" role="tabpanel">
+                        <div class="d-sm-flex gap-4 mb-3">
+                           <div class="tab-img flex-shrink-0">
+                              <img src="{% static 'images/ab-t1.png' %}" alt="History" class="rounded-4" style="width: 200px;">
+                           </div>
+                           <div class="tab-txt">
+                              <p>Founded in 1998 with a single van and a commitment to same-day delivery, we have grown into a global logistics powerhouse spanning 88 countries.</p>
+                              <p>From local courier to international freight, our journey is built on trust, innovation, and relentless dedication to our clients.</p>
+                           </div>
+                        </div>
+                        <h6 class="fw-bold text-crimson"><i class="bi bi-check-circle-fill me-2"></i>25+ Years of Excellence &amp; Growth</h6>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Operations -->
+   <section class="operation-sec bg-dark position-relative sec-padding overflow-hidden">
+      <div class="operate-bg jarallax bg-cover position-absolute" data-speed=".8" style="background-image: url('{% static 'images/opt-bg.png' %}'); opacity: 0.2;"></div>
+      <div class="container ct-container position-relative">
+         <div class="row">
+            <div class="col-lg-7 pe-lg-5">
+               <span class="sub-title2 fadeInUp single">Proven Success</span>
+               <h2 class="sec-title text-white">We have helped clients optimize all logistics operations.</h2>
+               <div class="ct-tab nav flex-column nav-pills me-3" id="operation-tab" role="tablist" aria-orientation="vertical">
+                  <div class="nav-item" role="presentation">
+                     <div class="nav-link d-flex align-items-center justify-content-between active" id="air-tab" data-bs-toggle="tab" data-bs-target="#air" type="button" role="tab">
+                        <div class="th-info">
+                           <h4 class="text-white">Air Freight Solution</h4>
+                           <p class="text-white">Fast, reliable air cargo services for time-sensitive shipments worldwide.</p>
+                        </div>
+                        <span class="icon-lg rounded-circle bg-white text-dark d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;"><i class="bi bi-arrow-right"></i></span>
+                     </div>
+                  </div>
+                  <div class="nav-item" role="presentation">
+                     <div class="nav-link d-flex align-items-center justify-content-between" id="warehouse-tab" data-bs-toggle="tab" data-bs-target="#warehouse" type="button" role="tab">
+                        <div class="th-info">
+                           <h4 class="text-white">Warehouse Inventory</h4>
+                           <p class="text-white">State-of-the-art storage facilities with real-time inventory management.</p>
+                        </div>
+                        <span class="icon-lg rounded-circle bg-white text-dark d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;"><i class="bi bi-arrow-right"></i></span>
+                     </div>
+                  </div>
+                  <div class="nav-item" role="presentation">
+                     <div class="nav-link d-flex align-items-center justify-content-between" id="road-tab" data-bs-toggle="tab" data-bs-target="#road" type="button" role="tab">
+                        <div class="th-info">
+                           <h4 class="text-white">By Road Instant Solution</h4>
+                           <p class="text-white">Efficient ground transportation with nationwide coverage and tracking.</p>
+                        </div>
+                        <span class="icon-lg rounded-circle bg-white text-dark d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;"><i class="bi bi-arrow-right"></i></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-5">
+               <div class="tab-content">
+                  <div class="tab-pane active" id="air" role="tabpanel">
+                     <div class="operation-content">
+                        <div class="operation-thumb rounded-4 overflow-hidden">
+                           <img src="{% static 'images/tab-main1.jpg' %}" alt="Air Freight">
+                        </div>
+                        <div class="opt-card bg-white">
+                           <span class="d-block mb-2"><img src="{% static 'images/tab-icon.png' %}" alt="" style="width: 40px;"></span>
+                           <h5>Air Freight Express</h5>
+                           <p class="small text-muted mb-2">Premium air cargo services with guaranteed delivery timelines.</p>
+                           <a class="link-btn" href="{% url 'services' %}">More Details <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="warehouse" role="tabpanel">
+                     <div class="operation-content">
+                        <div class="operation-thumb rounded-4 overflow-hidden">
+                           <img src="{% static 'images/tab-main2.jpg' %}" alt="Warehousing">
+                        </div>
+                        <div class="opt-card bg-white">
+                           <span class="d-block mb-2"><img src="{% static 'images/tab-icon.png' %}" alt="" style="width: 40px;"></span>
+                           <h5>Smart Warehousing</h5>
+                           <p class="small text-muted mb-2">Automated inventory systems with climate-controlled storage.</p>
+                           <a class="link-btn" href="{% url 'services' %}">More Details <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="road" role="tabpanel">
+                     <div class="operation-content">
+                        <div class="operation-thumb rounded-4 overflow-hidden">
+                           <img src="{% static 'images/tab-main3.jpg' %}" alt="Road Freight">
+                        </div>
+                        <div class="opt-card bg-white">
+                           <span class="d-block mb-2"><img src="{% static 'images/tab-icon.png' %}" alt="" style="width: 40px;"></span>
+                           <h5>Road Transport Network</h5>
+                           <p class="small text-muted mb-2">Comprehensive ground logistics with full fleet tracking.</p>
+                           <a class="link-btn" href="{% url 'services' %}">More Details <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- Team -->
+   <section class="team-sec sec-padding position-relative">
+      <div class="container">
+         <div class="sec-intro mx-auto text-center">
+            <span class="sub-title2 fadeInUp">our Expert Team Members</span>
+            <h2 class="sec-title">Meet our Special Support Team Members!</h2>
+         </div>
+         <div class="row gy-5 mt-4">
+            {% for name, role, img in team_members %}
+            <div class="col-lg-3 col-sm-6">
+               <div class="team-card">
+                  <div class="team-thumb round overflow-hidden">
+                     <img src="{% static img %}" alt="{{ name }}">
+                     <div class="team-share">
+                        <a class="link-icon rounded-circle" href="#"><i class="bi bi-link-45deg"></i></a>
+                        <div class="social-share">
+                           <a href="#"><i class="bi bi-facebook"></i></a>
+                           <a href="#"><i class="bi bi-twitter-x"></i></a>
+                           <a href="#"><i class="bi bi-instagram"></i></a>
+                           <a href="#"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="team-info">
+                     <h3 class="mb-0"><a href="#">{{ name }}</a></h3>
+                     <span>{{ role }}</span>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </section>
+
+   <!-- CTA -->
+   <section class="py-5 bg-shade">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-8">
+               <div class="p-4 rounded-3 text-white shadow-lg d-flex align-items-start" style="background-color:#0c0c0c; border: 4px solid rgba(255, 255, 255, 0.5);">
+                  <i class="bi bi-star-fill fs-2 me-3 flex-shrink-0 text-warning"></i>
+                  <div>
+                     <h4 class="fw-bold mb-1 text-uppercase text-white" style="letter-spacing: 1px;">Ready to Start Shipping with Confidence?</h4>
+                     <p class="lead mb-0 fs-6">
+                        Connect your business to the world with a partner built on trust and innovation. Visit our <a href="{% url 'contact:page' %}" class="text-warning fw-semibold text-decoration-underline">Contact Page</a> or request a consultation to begin.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+{% endblock %}
